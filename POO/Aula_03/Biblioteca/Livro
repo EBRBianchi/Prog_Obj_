@@ -1,0 +1,32 @@
+package Biblioteca;
+
+import java.time.LocalDate;
+
+public class Livro {
+    String titulo;
+    Autor autor;
+    LocalDate ano;
+    Boolean emprestado;
+    public Livro (String titulo,Autor autor, LocalDate ano, Boolean emprestado ){
+        this.titulo = titulo;
+        this.autor = autor;
+        this.ano = ano;
+        this. emprestado = null;
+    }
+    public void emprestar(boolean emprestado){
+        if (emprestado != true ){
+            emprestado = true;
+            System.out.println("Livro emprestado com sucesso !!");
+        
+        }
+        else{
+            System.out.println("Livro indisponivel ");
+        }
+    }
+    public void ExibirFicha(String titulo,Autor autor, LocalDate ano, Boolean emprestado){
+        System.out.println("Autor: " + autor.nome);
+        System.out.println("Titulo: " + titulo);
+        System.out.println("Data de lançamento: " + ano);
+
+    }
+}
