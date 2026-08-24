@@ -1,0 +1,17 @@
+package Consultorio;
+
+import java.time.LocalDate;
+
+public class Principal {
+    public static void main(String[] args) {
+        Paciente paciente1 = new Paciente("Maria", "55992363327");
+        Paciente paciente2 = new Paciente("Joao", "55992363328");
+
+        Consulta consulta1 = new Consulta(paciente1, LocalDate.of(2026, 2, 10), 180.70);
+        Consulta consulta2 = new Consulta(paciente2, LocalDate.of(2026, 2, 11), 200.00);
+
+        consulta1.exibirComprovante();
+        System.out.println();
+        consulta2.exibirComprovante();
+    }
+}
