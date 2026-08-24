@@ -1,0 +1,17 @@
+package Biblioteca;
+
+import java.time.LocalDate;
+
+public class Principal {
+    Autor autor1 = new Autor("Nolan","Americano");
+    Autor autor2 = new Autor("Tolstoi","Russo");
+    Livro livro1 = new Livro("MadMax",autor1,LocalDate.of(2026, 07, 18), true );
+    Livro livro2 = new Livro("Mad",autor1,LocalDate.of(2026, 07, 28), false );
+    Livro livro3 = new Livro("Guerra para viver",autor2,LocalDate.of(2026, 11, 28), false );
+    public static void main(String[] args) {
+        Principal principal = new Principal();
+        principal.livro1.ExibirFicha("MadMax", principal.autor1, LocalDate.of(2026, 07, 18), true);
+    }
+    
+    
+}
