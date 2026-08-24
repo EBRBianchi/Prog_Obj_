@@ -1,0 +1,21 @@
+package Consultorio;
+
+import java.time.LocalDate;
+
+public class Consulta {
+    Paciente paciente;
+    LocalDate data;
+    Double preco;
+
+    public Consulta(Paciente paciente, LocalDate data, Double preco) {
+        this.paciente = paciente;
+        this.data = data;
+        this.preco = preco;
+    }
+
+    public void exibirComprovante() {
+        System.out.println("Paciente: " + paciente.nome);
+        System.out.println("Valor da consulta: R$" + preco);
+        System.out.println("Data: " + data);
+    }
+}
