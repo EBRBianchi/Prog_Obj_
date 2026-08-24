@@ -1,0 +1,32 @@
+package AULA_02.ECOMERCE;
+
+public class Pedido {
+    Cliente cliente;
+    Produto produto;
+    int quantidade;
+    double percentualDesconto;
+
+    public Pedido(Cliente cliente, Produto produto, int quantidade) {
+        this.cliente = cliente;
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
+
+    public double valorTotal() {
+        double subtotal = produto.preco * quantidade;
+        return subtotal - subtotal * percentualDesconto / 100;
+    }
+
+    public void aplicarDesconto(double percentual) {
+        if (percentual >= 0 && percentual <= 100) {
+            percentualDesconto = percentual;
+        }
+    }
+
+    public void resumo() {
+        System.out.println("Cliente: " + cliente.nome);
+        System.out.println("Produto: " + produto.nome);
+        System.out.println("Quantidade: " + quantidade);
+        System.out.printf("Valor total: R$ %.2f%n", valorTotal());
+    }
+}
