@@ -1,0 +1,134 @@
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+package AULA_02.CONTA;
+
+import java.io.PrintStream;
+import java.util.ArrayList;
+
+public class Banco {
+   private ArrayList<ContaBancaria> contas = new ArrayList();
+   private int proximoNumero = 1;
+
+   public Banco() {
+   }
+
+   public ContaBancaria criarConta(String var1, String var2, String var3) {
+      if (var1 != null && !var1.trim().isEmpty()) {
+         if (var2 != null && !var2.trim().isEmpty()) {
+            if (var3 != null && !var3.trim().isEmpty()) {
+               String var4 = String.valueOf(this.proximoNumero++);
+               ContaBancaria var5 = new ContaBancaria(var4, new Titular(var1, var2, var3));
+               this.contas.add(var5);
+               System.out.println("Conta criada com sucesso. Número: " + var4);
+               return var5;
+            } else {
+               System.out.println("Data de nascimento inválida.");
+               return null;
+            }
+         } else {
+            System.out.println("CPF inválido.");
+            return null;
+         }
+      } else {
+         System.out.println("Nome inválido.");
+         return null;
+      }
+   }
+
+   public ContaBancaria buscarConta(String var1) {
+      if (var1 != null && !var1.trim().isEmpty()) {
+         for(ContaBancaria var3 : this.contas) {
+            if (var3.getNumeroConta().equals(var1)) {
+               return var3;
+            }
+         }
+
+         return null;
+      } else {
+         return null;
+      }
+   }
+
+   public boolean sacar(String var1, double var2) {
+      ContaBancaria var4 = this.buscarConta(var1);
+      if (var4 == null) {
+         System.out.println("Conta não encontrada.");
+         return false;
+      } else {
+         return var4.sacar(var2);
+      }
+   }
+
+   public boolean depositar(String var1, double var2) {
+      ContaBancaria var4 = this.buscarConta(var1);
+      if (var4 == null) {
+         System.out.println("Conta não encontrada.");
+         return false;
+      } else {
+         return var4.depositar(var2);
+      }
+   }
+
+   public void transferir(String var1, String var2, double var3) {
+      if (var1 != null && var2 != null && !var1.equals(var2)) {
+         ContaBancaria var5 = this.buscarConta(var1);
+         ContaBancaria var6 = this.buscarConta(var2);
+         if (var5 == null) {
+            System.out.println("Conta de origem não encontrada.");
+         } else if (var6 == null) {
+            System.out.println("Conta de destino não encontrada.");
+         } else if (var3 <= (double)0.0F) {
+            System.out.println("Valor de transferência inválido.");
+         } else {
+            if (var5.sacar(var3)) {
+               var6.depositar(var3);
+               System.out.println("Transferência realizada com sucesso.");
+            }
+
+         }
+      } else {
+         System.out.println("Transferência inválida. Conta de origem e destino devem ser diferentes.");
+      }
+   }
+
+   public double consultarSaldo(String var1) {
+      ContaBancaria var2 = this.buscarConta(var1);
+      if (var2 == null) {
+         System.out.println("Conta não encontrada.");
+         return (double)0.0F;
+      } else {
+         return var2.getSaldo();
+      }
+   }
+
+   public void exibirExtrato(String var1) {
+      ContaBancaria var2 = this.buscarConta(var1);
+      if (var2 == null) {
+         System.out.println("Conta não encontrada.");
+      } else {
+         var2.exibirExtrato();
+      }
+   }
+
+   public boolean aplicarRendimento(String var1, double var2) {
+      ContaBancaria var4 = this.buscarConta(var1);
+      if (var4 == null) {
+         System.out.println("Conta não encontrada.");
+         return false;
+      } else {
+         return var4.aplicarRendimento(var2);
+      }
+   }
+
+   public void listarContas() {
+      if (this.contas.isEmpty()) {
+         System.out.println("Nenhuma conta cadastrada.");
+      } else {
+         for(ContaBancaria var2 : this.contas) {
+            PrintStream var10000 = System.out;
+            String var10001 = var2.getNumeroConta();
+            var10000.println("Conta " + var10001 + " - Titular: " + var2.getTitular().getNome() + " - Saldo: R$ " + var2.getSaldo());
+         }
+
+      }
+   }
+}
