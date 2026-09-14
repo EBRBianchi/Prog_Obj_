@@ -1,0 +1,119 @@
+package AULA_02.CONTA;
+
+import java.util.ArrayList;
+
+public class ContaBancaria {
+    private String numeroConta;
+    private Titular titular;
+    private double saldo;
+    private ArrayList<Double> movimentacoes = new ArrayList<>();
+
+    public ContaBancaria(String numeroConta, Titular titular) {
+        this.numeroConta = numeroConta;
+        this.titular = titular;
+        this.saldo = 0.0;
+    }
+
+    public void exibirExtrato() {
+        if (movimentacoes.isEmpty()) {
+            System.out.println("Nenhuma movimentação registrada.");
+            return;
+        }
+
+        for (int i = 0; i < movimentacoes.size(); i++) {
+            System.out.println((i + 1) + " - R$ " + movimentacoes.get(i));
+        }
+    }
+
+    void ExibirExtrato() {
+        exibirExtrato();
+    }
+
+    public double totalDepositado() {
+        double total = 0.0;
+        for (Double mov : movimentacoes) {
+            if (mov > 0) {
+                total += mov;
+            }
+        }
+        return total;
+    }
+
+    void mostrarTotalDepositado() {
+        System.out.println("Total Depositado: R$ " + totalDepositado());
+    }
+
+    public double maiorSaque() {
+        if (movimentacoes.isEmpty()) {
+            return 0.0;
+        }
+
+        double maiorSaque = 0.0;
+        for (Double mov : movimentacoes) {
+            if (mov < 0 && Math.abs(mov) > maiorSaque) {
+                maiorSaque = Math.abs(mov);
+            }
+        }
+        return maiorSaque;
+    }
+
+    void mostrarMaiorSaque() {
+        System.out.println("Maior saque: R$ " + maiorSaque());
+    }
+
+    public boolean depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+            movimentacoes.add(valor);
+            System.out.println("Depósito de R$ " + valor + " realizado com sucesso.");
+            return true;
+        }
+
+        System.out.println("Valor de depósito inválido.");
+        return false;
+    }
+
+    public boolean sacar(double valor) {
+        if (valor <= 0) {
+            System.out.println("Saque negado. Valor inválido.");
+            return false;
+        }
+
+        if (saldo >= valor) {
+            saldo -= valor;
+            movimentacoes.add(-valor);
+            System.out.println("Saque de R$ " + valor + " realizado com sucesso.");
+            return true;
+        }
+
+        System.out.println("Saque negado. Saldo insuficiente.");
+        return false;
+    }
+
+    public boolean aplicarRendimento(double percentual) {
+        if (percentual < 0) {
+            System.out.println("Percentual inválido.");
+            return false;
+        }
+
+        double valorRendimento = saldo * (percentual / 100.0);
+        saldo += valorRendimento;
+        movimentacoes.add(valorRendimento);
+        System.out.println("Rendimento aplicado: R$ " + valorRendimento);
+        return true;
+    }
+
+    public String getNumeroConta() {
+        return numeroConta;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public Titular getTitular() {
+        return titular;
+    }
+}
+
+
